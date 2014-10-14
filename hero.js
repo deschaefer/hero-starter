@@ -37,7 +37,7 @@
 
             var myHero = gameData.activeHero;
 
-              if ( myHero.heroesKilled > this.prevKills )
+              if ( myHero.heroesKilled > this.prevKills || myHero.health < 60 )
               {
                   this.prevKills = myHero.heroesKilled;
                   this.currentAction = 'Health' ;
