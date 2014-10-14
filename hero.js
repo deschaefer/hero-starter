@@ -42,7 +42,6 @@
                   this.prevKills = myHero.heroesKilled;
                   this.currentAction = 'Health' ;
               }
-
               if ( this.prevHealth > myHero.health || myHero.health > 80 )
               {
                   this.prevHealth = myHero.health;
