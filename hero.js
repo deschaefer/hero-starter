@@ -1,79 +1,79 @@
-    /*
+        /*
 
-      The only function that is required in this file is the "move" function
+          The only function that is required in this file is the "move" function
 
-      You MUST export the move function, in order for your code to run
-      So, at the bottom of this code, keep the line that says:
+          You MUST export the move function, in order for your code to run
+          So, at the bottom of this code, keep the line that says:
 
-      module.exports = move;
+          module.exports = move;
 
-      The "move" function must return "North", "South", "East", "West", or "Stay"
-      (Anything else will be interpreted by the game as "Stay")
+          The "move" function must return "North", "South", "East", "West", or "Stay"
+          (Anything else will be interpreted by the game as "Stay")
 
-      The "move" function should accept two arguments that the website will be passing in:
-        - a "gameData" object which holds all information about the current state
-          of the battle
+          The "move" function should accept two arguments that the website will be passing in:
+            - a "gameData" object which holds all information about the current state
+              of the battle
 
-        - a "helpers" object, which contains useful helper functions
-          - check out the helpers.js file to see what is available to you
+            - a "helpers" object, which contains useful helper functions
+              - check out the helpers.js file to see what is available to you
 
-        (the details of these objects can be found on javascriptbattle.com/#rules)
+            (the details of these objects can be found on javascriptbattle.com/#rules)
 
-      This file contains four example heroes that you can use as is, adapt, or
-      take ideas from and implement your own version. Simply uncomment your desired
-      hero and see what happens in tomorrow's battle!
+          This file contains four example heroes that you can use as is, adapt, or
+          take ideas from and implement your own version. Simply uncomment your desired
+          hero and see what happens in tomorrow's battle!
 
-      Such is the power of Javascript!!!
+          Such is the power of Javascript!!!
 
-    */
+        */
 
-    var LocalHero = {
+        var LocalHero = {
 
-        prevHealth : 100,
-        prevKills : 0,
-        currentAction : 'Hero',
+            prevHealth : 100,
+            prevKills : 0,
+            currentAction : 'Hero',
 
-        move : function(gameData, helpers) {
+            move : function(gameData, helpers) {
 
-            var myHero = gameData.activeHero;
+                var myHero = gameData.activeHero;
 
-              if ( myHero.heroesKilled > this.prevKills || myHero.health < 60 )
-              {
-                  this.prevKills = myHero.heroesKilled;
-                  this.currentAction = 'Health' ;
-              }
-              if ( this.prevHealth > myHero.health || myHero.health > 80 )
-              {
-                  this.prevHealth = myHero.health;
-                  this.currentAction = 'Hero';
-              }
+                  if ( myHero.health < 60 )
+                  {
+                      this.currentAction = 'Health' ;
+                  }
 
-              var rval = '';
+                  if ( myHero.health > 60 )
+                  {
+                      this.currentAction = 'Hero';
+                  }
 
-              if (this.currentAction == 'Hero')
-              {
-                  rval =  helpers.findNearestWeakerEnemy(gameData);
-              }
-              else
-              {
-                  rval =  helpers.findNearestHealthWell(gameData);
-              }
+                  var rval = '';
 
-              if (!rval ||  rval === '' )
-              {
-                  rval = helpers.findNearestEnemy(gameData);
-              }
+                  if (this.currentAction == 'Hero')
+                  {
+                      rval =  helpers.findNearestWeakerEnemy(gameData);
+                  }
 
-              return rval;
+                  if ( this.currentAction == "Health")
+                  {
+                      rval =  helpers.findNearestHealthWell(gameData);
+                  }
+
+                  if (!rval ||  rval === '' )
+                  {
+                      rval = helpers.findNearestHealthWell(gameData);
+                  }
+
+                  return rval;
+
+            }
 
         }
 
-    }
-
-    var move = function(gameData, helpers) {
-        return LocalHero.move(gameData, helpers);
-    };
+        var move = function(gameData, helpers) {
+            return LocalHero.move(gameData, helpers);
+        };
 
 
-    // Export the move function here
-    module.exports = move;
+        // Export the move function here
+        module.exports = move;
