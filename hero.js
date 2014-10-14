@@ -43,7 +43,7 @@
                   this.currentAction = 'Health' ;
               }
 
-              if ( this.prevHealth > myHero.health )
+              if ( this.prevHealth > myHero.health || myHero.health > 80 )
               {
                   this.prevHealth = myHero.health;
                   this.currentAction = 'Hero';
